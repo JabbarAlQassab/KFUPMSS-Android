@@ -10,7 +10,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/top_linearlayout"
+            android:id="@+id/top_linear_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -71,6 +71,7 @@
                 android:textSize="18sp" />
 
             <Button
+                android:id="@+id/edit_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Edit" />

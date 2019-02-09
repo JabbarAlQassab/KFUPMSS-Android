@@ -10,17 +10,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.example.android.kfupmsocialspace.presenter.RoomChatRequestPresenter;
+
 public class ChatsFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.chats_fragment, container, false);
-        FloatingActionButton fab = view.findViewById(R.id.fab);
+        FloatingActionButton fab = view.findViewById(R.id.floating_btn_add_course);
         fab.setOnClickListener(this);
 
         return view;
     }
+
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(getContext(), AddCourseActivity.class);

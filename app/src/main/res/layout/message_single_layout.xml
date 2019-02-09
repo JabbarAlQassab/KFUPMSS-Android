@@ -5,35 +5,43 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp">
 
-
-
-    <TextView
-        android:id="@+id/receiver_message"
+    <LinearLayout
+        android:id="@+id/receiver_message_holder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_margin="8dp"
-        android:background="@drawable/message_text_background"
-        android:padding="8dp"
-        android:text="dummy text"
-        android:textColor="@android:color/white"
-        android:textSize="16sp" />
+        android:background="@drawable/received_message"
+        android:orientation="vertical"
+        android:padding="8dp">
 
+        <TextView
+            android:id="@+id/receiver_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="dummy text"
+            android:textColor="@android:color/holo_green_light"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/receiver_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dummy text"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/sender_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_margin="8dp"
+        android:layout_alignParentRight="true"
         android:background="@drawable/sender_message"
         android:padding="8dp"
         android:text="dummy text"
-        android:layout_alignParentRight="true"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
+        android:layout_centerVertical="true"
         android:textSize="16sp" />
-
-
-
 
 </RelativeLayout>

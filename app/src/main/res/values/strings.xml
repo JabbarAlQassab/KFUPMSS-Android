@@ -1,17 +1,8 @@
 <resources>
     <string name="app_name">KFUPM Social Space</string>
-    <string name="title_activity_main_screen">MainScreen</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-    <string name="chats">Chats</string>
-    <string name="blogs">Blogs</string>
-    <string name="roommate">Roommate</string>
-    <string name="market">Market</string>
-    <string name="title_activity_main2">Main2Activity</string>
     <string name="title_chats">Chats</string>
     <string name="title_blogs">Blogs</string>
     <string name="title_roommate">Roommate</string>
@@ -21,7 +12,7 @@
     <string name="files">Files</string>
     <string name="log_out">Log out</string>
     <string name="student_name">Student Name</string>
-    <string name="news">News</string>
+    <string name="news_and_events">News &amp; Events</string>
     <string name="password">Password</string>
     <string name="id_number">ID Number</string>
     <string name="sign_in">Sign In</string>
@@ -32,9 +23,9 @@
     <string name="select_a_course">Select a course</string>
     <string name="request">Request</string>
     <string name="title_activity_utilities">UtilitiesActivity</string>
-    <string name="tab_text_1">KFUPM NUMBERS</string>
-    <string name="tab_text_2">Resturants</string>
-    <string name="tab_text_3">Useful Links</string>
+    <string name="tab_text_kfupm_numbers">KFUPM NUMBERS</string>
+    <string name="tab_text_restaurants">Restaurants</string>
+    <string name="tab_text_links">Useful Links</string>
     <!--Hello World from section: %1$d-->
     <string name="section_format">Utility lists here</string>
     <string name="title_activity_settings">Settings</string>
@@ -97,8 +88,6 @@
         <item>3</item>
     </string-array>
 
-    <string-array name="multi_select_list_preference_default_value" />
-
     <string name="pref_title_system_sync_settings">System sync settings</string>
 
     <!-- Example settings for Notifications -->
@@ -110,4 +99,11 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="title_activity_news">NewsActivity</string>
+    <string name="tab_text_news">News</string>
+    <string name="tab_text_events">Events</string>
+    <string name="tab_text_club_events">Clubs Events</string>
+    <string name="title_activity_my_market_items">MyMarketItemsActivity</string>
+    <string name="placed_market_items">Placed Items</string>
+    <string name="reserved_market_items">Reserved Items</string>
 </resources>
