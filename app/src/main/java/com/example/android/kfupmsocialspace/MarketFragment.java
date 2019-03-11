@@ -1,5 +1,6 @@
 package com.example.android.kfupmsocialspace;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,12 +9,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.android.kfupmsocialspace.Adapter.MarketRecyclerViewAdapter;
 import com.example.android.kfupmsocialspace.model.MarketItem;
+import com.example.android.kfupmsocialspace.presenter.userPresenter;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,14 +30,25 @@ import java.util.List;
 public class MarketFragment extends Fragment implements View.OnClickListener {
 
 
+    List<MarketItem> marketItemList = new ArrayList<>();
+    RecyclerView market_recycler_view;
+    MarketRecyclerViewAdapter marketItemAdapter;
+
+    GridLayoutManager gridLayoutManager;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference dbRef = database.getReference("Market Item");
 
-    List<MarketItem> marketItemList = new ArrayList<>();;
-    RecyclerView market_recycler_view ;
-    MarketRecyclerViewAdapter marketItemAdapter;
-    GridLayoutManager gridLayoutManager;
-
+    //https://stackoverflow.com/questions/29579811/changing-number-of-columns-with-gridlayoutmanager-and-recyclerview
+    public static int calculateNoOfColumns(Context context) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        int scalingFactor = 200; // You can vary the value held by the scalingFactor
+        // variable. The smaller it is the more no. of columns you can display, and the
+        // larger the value the less no. of columns will be calculated. It is the scaling
+        // factor to tweak to your needs.
+        int columnCount = (int) (dpWidth / scalingFactor);
+        return (columnCount >= 2 ? columnCount : 2); // if column no. is less than 2, we still display 2 columns
+    }
 
     @Nullable
     @Override
@@ -65,11 +79,14 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
         */
 
 
+
+
         market_recycler_view = view.findViewById(R.id.recycler_market_items_list);
         marketItemAdapter = new MarketRecyclerViewAdapter(marketItemList, getContext());
-        gridLayoutManager = new GridLayoutManager(getContext(),2);
+        gridLayoutManager = new GridLayoutManager(getContext(), calculateNoOfColumns(getContext()));
         market_recycler_view.setLayoutManager(gridLayoutManager);
         market_recycler_view.setAdapter(marketItemAdapter);
+        marketItemAdapter.notifyDataSetChanged();
 
         //click event and pass data.
         marketItemAdapter.SetOnItemClickListener(new MarketRecyclerViewAdapter.OnItemClickListener() {
@@ -87,32 +104,42 @@ public class MarketFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-    }
 
+    }
 
     public void onStart() {
 
         super.onStart();
+
+        marketItemList.clear();
 
         dbRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                 MarketItem marketItem = dataSnapshot.getValue(MarketItem.class);
-
                 marketItemList.add(marketItem);
-                gridLayoutManager.scrollToPosition(marketItemList.size() - 1);
+                //no need to scroll here, this isn't the chat.
+                //gridLayoutManager.scrollToPosition(marketItemList.size() - 1);
                 marketItemAdapter.notifyDataSetChanged();
 
             }
+
             @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) { }
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            }
+
             @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) { }
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+            }
+
             @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) { }
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            }
+
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) { }
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
         });
     }
 

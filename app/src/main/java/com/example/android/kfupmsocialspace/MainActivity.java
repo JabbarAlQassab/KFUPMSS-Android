@@ -2,6 +2,7 @@ package com.example.android.kfupmsocialspace;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -11,11 +12,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.kfupmsocialspace.firebaseServices.FirebaseService;
+import com.example.android.kfupmsocialspace.presenter.userPresenter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             break;
                         case (R.id.navigation_blogs):
                             selectedFragment = new BlogsFragment();
+                            break;
+                        case (R.id.navigation_news):
+                            selectedFragment = new NewsFragment();
                             break;
                         case (R.id.navigation_roommate):
                             selectedFragment = new RoommateFragment();
@@ -51,6 +61,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //Firebase for login out
     private FirebaseAuth firebaseAuth;
     private DrawerLayout drawer;
+
+
+
+
+
+    //user
+    userPresenter userPresenter;
+    private String userName;
 
     //This part adds the three dots on the top right
     @Override
@@ -85,6 +103,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        //for the token this has to be declared in the signup page but for now it is here
+        userPresenter = new userPresenter();
+
+        //get the user name
+        //userName = userPresenter.getTheUsername();
+
+        //this is also here because no idea where it should be
+        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+
 
         //Firebase auth
         firebaseAuth = FirebaseAuth.getInstance();
@@ -140,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent = new Intent(this, UtilitiesActivity.class);
                 break;
             case (R.id.navigation_news):
-                intent = new Intent(this, NewsActivity.class);
+                intent = new Intent(this, NewsFragment.class);
                 break;
             case (R.id.nav_files):
                 intent = new Intent(this, FilesActivity.class);
@@ -179,7 +208,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
         NavigationView navigationview = findViewById(R.id.nav_view);
+
+
         for (int i = 0; i < navigationview.getMenu().size(); i++)
             navigationview.getMenu().getItem(i).setChecked(false);
+
+
+
+
+
     }
+
+
+
 }

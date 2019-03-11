@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.kfupmsocialspace">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +16,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChatroomRequestActivity"></activity>
+        <activity
+            android:name=".MyMarketItemEditActivity"
+            android:parentActivityName="MyMarketItemViewActivity"></activity>
+        <activity
+            android:name=".MyMarketItemViewActivity"
+            android:parentActivityName=".MyMarketItemsActivity" />
+        <activity
+            android:name=".RoommateRequestViewActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".ChatroomRequestActivity" />
         <activity
             android:name=".MyMarketItemsActivity"
             android:label="@string/title_activity_my_market_items"
@@ -27,16 +43,15 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MarketItemViewActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".NewsActivity"
-            android:label="@string/title_activity_news"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.kfupmsocialspace.MainActivity" />
-        </activity>
+            android:parentActivityName=".MainActivity" /> <!-- <activity -->
+        <!-- android:name=".NewsFragment" -->
+        <!-- android:label="@string/title_activity_news" -->
+        <!-- android:parentActivityName=".MainActivity" -->
+        <!-- android:theme="@style/AppTheme.NoActionBar"> -->
+        <!-- <meta-data -->
+        <!-- android:name="android.support.PARENT_ACTIVITY" -->
+        <!-- android:value="com.example.android.kfupmsocialspace.MainActivity" /> -->
+        <!-- </activity> -->
         <activity
             android:name=".AddRoommateRequestActivity"
             android:parentActivityName=".MainActivity" />
@@ -103,6 +118,12 @@
         <activity
             android:name=".Placeholder"
             android:theme="@style/SplashTheme" />
+
+        <service android:name=".firebaseServices.FirebaseService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
